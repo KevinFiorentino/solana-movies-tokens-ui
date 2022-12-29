@@ -1,6 +1,6 @@
-export type MovieReview = {
+export type SolanaMoviesTokens = {
   "version": "0.1.0",
-  "name": "movie_review",
+  "name": "solana_movies_tokens",
   "instructions": [
     {
       "name": "addMovieReview",
@@ -8,55 +8,17 @@ export type MovieReview = {
         {
           "name": "movieReview",
           "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "arg",
-                "type": "string",
-                "path": "title"
-              },
-              {
-                "kind": "account",
-                "type": "publicKey",
-                "path": "initializer"
-              }
-            ]
-          }
+          "isSigner": false
         },
         {
           "name": "movieCommentCounter",
           "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "type": "string",
-                "value": "counter"
-              },
-              {
-                "kind": "account",
-                "type": "publicKey",
-                "account": "MovieAccountState",
-                "path": "movie_review"
-              }
-            ]
-          }
+          "isSigner": false
         },
         {
           "name": "rewardMint",
           "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "type": "string",
-                "value": "mint"
-              }
-            ]
-          }
+          "isSigner": false
         },
         {
           "name": "tokenAccount",
@@ -105,127 +67,12 @@ export type MovieReview = {
       ]
     },
     {
-      "name": "addComment",
-      "accounts": [
-        {
-          "name": "movieComment",
-          "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "type": "publicKey",
-                "account": "MovieAccountState",
-                "path": "movie_review"
-              },
-              {
-                "kind": "account",
-                "type": "u64",
-                "account": "MovieCommentCounter",
-                "path": "movie_comment_counter.counter"
-              }
-            ]
-          }
-        },
-        {
-          "name": "movieReview",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "movieCommentCounter",
-          "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "type": "string",
-                "value": "counter"
-              },
-              {
-                "kind": "account",
-                "type": "publicKey",
-                "account": "MovieAccountState",
-                "path": "movie_review"
-              }
-            ]
-          }
-        },
-        {
-          "name": "rewardMint",
-          "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "type": "string",
-                "value": "mint"
-              }
-            ]
-          }
-        },
-        {
-          "name": "tokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "comment",
-          "type": "string"
-        }
-      ]
-    },
-    {
       "name": "updateMovieReview",
       "accounts": [
         {
           "name": "movieReview",
           "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "arg",
-                "type": "string",
-                "path": "title"
-              },
-              {
-                "kind": "account",
-                "type": "publicKey",
-                "path": "initializer"
-              }
-            ]
-          }
+          "isSigner": false
         },
         {
           "name": "initializer",
@@ -270,21 +117,73 @@ export type MovieReview = {
       "args": []
     },
     {
+      "name": "addComment",
+      "accounts": [
+        {
+          "name": "movieComment",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "movieReview",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "movieCommentCounter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "initializer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "comment",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "name": "createRewardMint",
       "accounts": [
         {
           "name": "rewardMint",
           "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "type": "string",
-                "value": "mint"
-              }
-            ]
-          }
+          "isSigner": false
         },
         {
           "name": "user",
@@ -401,12 +300,15 @@ export type MovieReview = {
       "name": "InvalidRating",
       "msg": "Rating greater than 5 or less than 1"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "1385JT6hVus5EWzut6BtQWLfEeWo2qWgT9FzUTBqJcSK"
+  }
 };
 
-export const IDL: MovieReview = {
+export const IDL: SolanaMoviesTokens = {
   "version": "0.1.0",
-  "name": "movie_review",
+  "name": "solana_movies_tokens",
   "instructions": [
     {
       "name": "addMovieReview",
@@ -414,55 +316,17 @@ export const IDL: MovieReview = {
         {
           "name": "movieReview",
           "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "arg",
-                "type": "string",
-                "path": "title"
-              },
-              {
-                "kind": "account",
-                "type": "publicKey",
-                "path": "initializer"
-              }
-            ]
-          }
+          "isSigner": false
         },
         {
           "name": "movieCommentCounter",
           "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "type": "string",
-                "value": "counter"
-              },
-              {
-                "kind": "account",
-                "type": "publicKey",
-                "account": "MovieAccountState",
-                "path": "movie_review"
-              }
-            ]
-          }
+          "isSigner": false
         },
         {
           "name": "rewardMint",
           "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "type": "string",
-                "value": "mint"
-              }
-            ]
-          }
+          "isSigner": false
         },
         {
           "name": "tokenAccount",
@@ -511,127 +375,12 @@ export const IDL: MovieReview = {
       ]
     },
     {
-      "name": "addComment",
-      "accounts": [
-        {
-          "name": "movieComment",
-          "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "type": "publicKey",
-                "account": "MovieAccountState",
-                "path": "movie_review"
-              },
-              {
-                "kind": "account",
-                "type": "u64",
-                "account": "MovieCommentCounter",
-                "path": "movie_comment_counter.counter"
-              }
-            ]
-          }
-        },
-        {
-          "name": "movieReview",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "movieCommentCounter",
-          "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "type": "string",
-                "value": "counter"
-              },
-              {
-                "kind": "account",
-                "type": "publicKey",
-                "account": "MovieAccountState",
-                "path": "movie_review"
-              }
-            ]
-          }
-        },
-        {
-          "name": "rewardMint",
-          "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "type": "string",
-                "value": "mint"
-              }
-            ]
-          }
-        },
-        {
-          "name": "tokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "comment",
-          "type": "string"
-        }
-      ]
-    },
-    {
       "name": "updateMovieReview",
       "accounts": [
         {
           "name": "movieReview",
           "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "arg",
-                "type": "string",
-                "path": "title"
-              },
-              {
-                "kind": "account",
-                "type": "publicKey",
-                "path": "initializer"
-              }
-            ]
-          }
+          "isSigner": false
         },
         {
           "name": "initializer",
@@ -676,21 +425,73 @@ export const IDL: MovieReview = {
       "args": []
     },
     {
+      "name": "addComment",
+      "accounts": [
+        {
+          "name": "movieComment",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "movieReview",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "movieCommentCounter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "initializer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "comment",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "name": "createRewardMint",
       "accounts": [
         {
           "name": "rewardMint",
           "isMut": true,
-          "isSigner": false,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "type": "string",
-                "value": "mint"
-              }
-            ]
-          }
+          "isSigner": false
         },
         {
           "name": "user",
@@ -807,5 +608,8 @@ export const IDL: MovieReview = {
       "name": "InvalidRating",
       "msg": "Rating greater than 5 or less than 1"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "1385JT6hVus5EWzut6BtQWLfEeWo2qWgT9FzUTBqJcSK"
+  }
 };

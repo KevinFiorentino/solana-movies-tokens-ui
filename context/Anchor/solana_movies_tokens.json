@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "movie_review",
+  "name": "solana_movies_tokens",
   "instructions": [
     {
       "name": "addMovieReview",
@@ -67,6 +67,56 @@
       ]
     },
     {
+      "name": "updateMovieReview",
+      "accounts": [
+        {
+          "name": "movieReview",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "initializer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "rating",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "close",
+      "accounts": [
+        {
+          "name": "movieReview",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "reviewer",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "addComment",
       "accounts": [
         {
@@ -126,56 +176,6 @@
           "type": "string"
         }
       ]
-    },
-    {
-      "name": "updateMovieReview",
-      "accounts": [
-        {
-          "name": "movieReview",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "title",
-          "type": "string"
-        },
-        {
-          "name": "description",
-          "type": "string"
-        },
-        {
-          "name": "rating",
-          "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "close",
-      "accounts": [
-        {
-          "name": "movieReview",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "reviewer",
-          "isMut": true,
-          "isSigner": true
-        }
-      ],
-      "args": []
     },
     {
       "name": "createRewardMint",
@@ -302,6 +302,6 @@
     }
   ],
   "metadata": {
-    "address": "BouTUP7a3MZLtXqMAm1NrkJSKwAjmid8abqiNjUyBJSr"
+    "address": "1385JT6hVus5EWzut6BtQWLfEeWo2qWgT9FzUTBqJcSK"
   }
 }
