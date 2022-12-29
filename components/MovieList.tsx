@@ -1,13 +1,6 @@
 import { Card } from "./Card"
 import { FC, useEffect, useState } from "react"
-import {
-  Button,
-  Center,
-  HStack,
-  Input,
-  Spacer,
-  Heading,
-} from "@chakra-ui/react"
+import { Button, Center, HStack, Input, Spacer, Heading } from "@chakra-ui/react"
 import { useWorkspace } from "../context/Anchor"
 import { useWallet } from "@solana/wallet-adapter-react"
 import { useDisclosure } from "@chakra-ui/react"
@@ -23,10 +16,17 @@ export const MovieList: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const wallet = useWallet()
 
-  const fetchMyReviews = async () => { }
-
   useEffect(() => {
-    const fetchAccounts = async () => { }
+    const fetchAccounts = async () => {
+      if (program) {
+        const accounts = (await program.account.movieAccountState.all()) ?? []
+
+        const sort = [...accounts].sort((a, b) =>
+          a.account.title > b.account.title ? 1 : -1
+        )
+        setMovies(sort)
+      }
+    }
     fetchAccounts()
   }, [])
 
@@ -47,6 +47,27 @@ export const MovieList: FC = () => {
       setResult(filtered)
     }
   }, [page, movies, search])
+
+  const fetchMyReviews = async () => {
+    if (wallet.connected && program) {
+      const accounts =
+        (await program.account.movieAccountState.all([
+          {
+            memcmp: {
+              offset: 8,
+              bytes: wallet.publicKey!.toBase58(),
+            },
+          },
+        ])) ?? []
+
+      const sort = [...accounts].sort((a, b) =>
+        a.account.title > b.account.title ? 1 : -1
+      )
+      setResult(sort)
+    } else {
+      alert("Please Connect Wallet")
+    }
+  }
 
   const handleReviewSelected = (data: any) => {
     setSelectedMovie(data)
