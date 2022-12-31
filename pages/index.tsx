@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       <Center>
         <Box>
           <Heading as="h1" size="l" color="white" ml={4} mt={8}>
-            Add a review
+            Add a review and earn tokens!
           </Heading>
           <Form />
           <Heading as="h1" size="l" color="white" ml={4} mt={8}>

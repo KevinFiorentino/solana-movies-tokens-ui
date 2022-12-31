@@ -8,6 +8,8 @@ import * as anchor from "@project-serum/anchor"
 import { getAssociatedTokenAddress } from "@solana/spl-token"
 import { useConnection, useWallet } from "@solana/wallet-adapter-react"
 import { useWorkspace } from "../context/Anchor"
+import { Keypair } from "@solana/web3.js"
+import { PROGRAM_ID as METADATA_PROGRAM_ID } from "@metaplex-foundation/mpl-token-metadata";
 
 export const Form: FC = () => {
   const [title, setTitle] = useState("")
@@ -53,8 +55,7 @@ export const Form: FC = () => {
         .addMovieReview(title, description, rating)
         .accounts({
           movieReview: movieReviewPda,
-          movieCommentCounter: movieReviewCounterPda,
-          rewardMint: mintPDA,
+          mint: mintPDA,
           tokenAccount: tokenAddress,
         })
         .instruction()
@@ -63,7 +64,9 @@ export const Form: FC = () => {
     } else {
       const instruction = await program.methods
         .updateMovieReview(title, description, rating)
-        .accounts({ movieReview: movieReviewPda })
+        .accounts({
+          movieReview: movieReviewPda
+        })
         .instruction()
 
       transaction.add(instruction)
@@ -91,6 +94,7 @@ export const Form: FC = () => {
       borderWidth={1}
       margin={2}
       justifyContent="center"
+      boxShadow="2px 2px 4px #FAFAFA"
     >
       <form onSubmit={handleSubmit}>
         <FormControl isRequired>
@@ -132,7 +136,7 @@ export const Form: FC = () => {
             onChange={(event) => setToggle((prevCheck) => !prevCheck)}
           />
         </FormControl>
-        <Button width="full" mt={4} type="submit">
+        <Button width="full" mt={4} type="submit" className="solana-button-gradient">
           Submit Review
         </Button>
       </form>

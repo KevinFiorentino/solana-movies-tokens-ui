@@ -7,7 +7,9 @@ export const AppBar: FC = () => {
   return (
     <div className={styles.AppHeader}>
       <Image src="/solanaLogo.png" height={30} width={200} />
-      <span>Movie Reviews</span>
+      <span className="solana-text-gradient" style={{ fontWeight: 800, }}>
+        Movie Reviews
+      </span>
       <WalletMultiButton />
     </div>
   )

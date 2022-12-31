@@ -14,3 +14,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.solana-text-gradient {
+  background: -webkit-linear-gradient(rgba(20,241,149,1), rgba(153,69,255,1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.solana-button-gradient {
+  color: white;
+  background: linear-gradient(45deg, rgba(153,69,255,1) 0%, rgba(20,241,149,1) 100%) !important;
+}

@@ -11,12 +11,22 @@ export type SolanaMoviesTokens = {
           "isSigner": false
         },
         {
-          "name": "movieCommentCounter",
+          "name": "initializer",
           "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
           "isSigner": false
         },
         {
-          "name": "rewardMint",
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "mint",
           "isMut": true,
           "isSigner": false
         },
@@ -26,27 +36,12 @@ export type SolanaMoviesTokens = {
           "isSigner": false
         },
         {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -101,46 +96,10 @@ export type SolanaMoviesTokens = {
       ]
     },
     {
-      "name": "close",
+      "name": "deleteMovieReview",
       "accounts": [
         {
           "name": "movieReview",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "reviewer",
-          "isMut": true,
-          "isSigner": true
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "addComment",
-      "accounts": [
-        {
-          "name": "movieComment",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "movieReview",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "movieCommentCounter",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "rewardMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -150,7 +109,48 @@ export type SolanaMoviesTokens = {
           "isSigner": true
         },
         {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "initializeTokenMint",
+      "accounts": [
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
           "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMetadataProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -166,52 +166,6 @@ export type SolanaMoviesTokens = {
         },
         {
           "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "comment",
-          "type": "string"
-        }
-      ]
-    },
-    {
-      "name": "createRewardMint",
-      "accounts": [
-        {
-          "name": "rewardMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "user",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "metadata",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenMetadataProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -256,53 +210,17 @@ export type SolanaMoviesTokens = {
           }
         ]
       }
-    },
-    {
-      "name": "movieCommentCounter",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "counter",
-            "type": "u64"
-          }
-        ]
-      }
-    },
-    {
-      "name": "movieComment",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "review",
-            "type": "publicKey"
-          },
-          {
-            "name": "commenter",
-            "type": "publicKey"
-          },
-          {
-            "name": "comment",
-            "type": "string"
-          },
-          {
-            "name": "count",
-            "type": "u64"
-          }
-        ]
-      }
     }
   ],
   "errors": [
     {
       "code": 6000,
       "name": "InvalidRating",
-      "msg": "Rating greater than 5 or less than 1"
+      "msg": "Rating must be between 1 and 5"
     }
   ],
   "metadata": {
-    "address": "1385JT6hVus5EWzut6BtQWLfEeWo2qWgT9FzUTBqJcSK"
+    "address": "zTaCpP3fLPMErJib4KLtfxMa5GT7YDmyxYZdddeCeDi"
   }
 };
 
@@ -319,12 +237,22 @@ export const IDL: SolanaMoviesTokens = {
           "isSigner": false
         },
         {
-          "name": "movieCommentCounter",
+          "name": "initializer",
           "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
           "isSigner": false
         },
         {
-          "name": "rewardMint",
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "mint",
           "isMut": true,
           "isSigner": false
         },
@@ -334,27 +262,12 @@ export const IDL: SolanaMoviesTokens = {
           "isSigner": false
         },
         {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -409,46 +322,10 @@ export const IDL: SolanaMoviesTokens = {
       ]
     },
     {
-      "name": "close",
+      "name": "deleteMovieReview",
       "accounts": [
         {
           "name": "movieReview",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "reviewer",
-          "isMut": true,
-          "isSigner": true
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "addComment",
-      "accounts": [
-        {
-          "name": "movieComment",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "movieReview",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "movieCommentCounter",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "rewardMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -458,7 +335,48 @@ export const IDL: SolanaMoviesTokens = {
           "isSigner": true
         },
         {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "initializeTokenMint",
+      "accounts": [
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
           "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMetadataProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -474,52 +392,6 @@ export const IDL: SolanaMoviesTokens = {
         },
         {
           "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "comment",
-          "type": "string"
-        }
-      ]
-    },
-    {
-      "name": "createRewardMint",
-      "accounts": [
-        {
-          "name": "rewardMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "user",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "metadata",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenMetadataProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -564,52 +436,16 @@ export const IDL: SolanaMoviesTokens = {
           }
         ]
       }
-    },
-    {
-      "name": "movieCommentCounter",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "counter",
-            "type": "u64"
-          }
-        ]
-      }
-    },
-    {
-      "name": "movieComment",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "review",
-            "type": "publicKey"
-          },
-          {
-            "name": "commenter",
-            "type": "publicKey"
-          },
-          {
-            "name": "comment",
-            "type": "string"
-          },
-          {
-            "name": "count",
-            "type": "u64"
-          }
-        ]
-      }
     }
   ],
   "errors": [
     {
       "code": 6000,
       "name": "InvalidRating",
-      "msg": "Rating greater than 5 or less than 1"
+      "msg": "Rating must be between 1 and 5"
     }
   ],
   "metadata": {
-    "address": "1385JT6hVus5EWzut6BtQWLfEeWo2qWgT9FzUTBqJcSK"
+    "address": "zTaCpP3fLPMErJib4KLtfxMa5GT7YDmyxYZdddeCeDi"
   }
 };

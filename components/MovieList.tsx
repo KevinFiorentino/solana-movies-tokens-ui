@@ -4,7 +4,6 @@ import { Button, Center, HStack, Input, Spacer, Heading } from "@chakra-ui/react
 import { useWorkspace } from "../context/Anchor"
 import { useWallet } from "@solana/wallet-adapter-react"
 import { useDisclosure } from "@chakra-ui/react"
-import { ReviewDetail } from "./ReviewDetail"
 
 export const MovieList: FC = () => {
   const { program } = useWorkspace()
@@ -69,11 +68,6 @@ export const MovieList: FC = () => {
     }
   }
 
-  const handleReviewSelected = (data: any) => {
-    setSelectedMovie(data)
-    onOpen()
-  }
-
   return (
     <div>
       <Center>
@@ -87,14 +81,10 @@ export const MovieList: FC = () => {
           mb={2}
           margin={2}
         />
-        <Button onClick={fetchMyReviews}>My Reviews</Button>
+        <Button onClick={fetchMyReviews} color="white" className="solana-button-gradient">
+          Search
+        </Button>
       </Center>
-      <Heading as="h1" size="l" color="white" ml={4} mt={8}>
-        Select Review To Comment
-      </Heading>
-      {selectedMovie && (
-        <ReviewDetail isOpen={isOpen} onClose={onClose} movie={selectedMovie} />
-      )}
       {result && (
         <div>
           {Object.keys(result).map((key) => {
@@ -103,9 +93,6 @@ export const MovieList: FC = () => {
               <Card
                 key={key}
                 movie={data}
-                onClick={() => {
-                  handleReviewSelected(data)
-                }}
               />
             )
           })}
