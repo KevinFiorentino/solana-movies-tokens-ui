@@ -135,11 +135,6 @@ export type SolanaMoviesTokens = {
           "isSigner": false
         },
         {
-          "name": "tokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "user",
           "isMut": true,
           "isSigner": true
@@ -151,11 +146,6 @@ export type SolanaMoviesTokens = {
         },
         {
           "name": "tokenMetadataProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -220,7 +210,7 @@ export type SolanaMoviesTokens = {
     }
   ],
   "metadata": {
-    "address": "zTaCpP3fLPMErJib4KLtfxMa5GT7YDmyxYZdddeCeDi"
+    "address": "EjUKYk8xsG78gZTkR6EqjKJADjyqSiTsr6CtajCBmKrT"
   }
 };
 
@@ -361,11 +351,6 @@ export const IDL: SolanaMoviesTokens = {
           "isSigner": false
         },
         {
-          "name": "tokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "user",
           "isMut": true,
           "isSigner": true
@@ -377,11 +362,6 @@ export const IDL: SolanaMoviesTokens = {
         },
         {
           "name": "tokenMetadataProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -446,6 +426,6 @@ export const IDL: SolanaMoviesTokens = {
     }
   ],
   "metadata": {
-    "address": "zTaCpP3fLPMErJib4KLtfxMa5GT7YDmyxYZdddeCeDi"
+    "address": "EjUKYk8xsG78gZTkR6EqjKJADjyqSiTsr6CtajCBmKrT"
   }
 };

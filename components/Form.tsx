@@ -8,8 +8,6 @@ import * as anchor from "@project-serum/anchor"
 import { getAssociatedTokenAddress } from "@solana/spl-token"
 import { useConnection, useWallet } from "@solana/wallet-adapter-react"
 import { useWorkspace } from "../context/Anchor"
-import { Keypair } from "@solana/web3.js"
-import { PROGRAM_ID as METADATA_PROGRAM_ID } from "@metaplex-foundation/mpl-token-metadata";
 
 export const Form: FC = () => {
   const [title, setTitle] = useState("")
@@ -36,17 +34,12 @@ export const Form: FC = () => {
       program.programId
     )
 
-    const [movieReviewPda] = await anchor.web3.PublicKey.findProgramAddress(
+    const [movieReviewPDA] = await anchor.web3.PublicKey.findProgramAddress(
       [Buffer.from(title), publicKey.toBuffer()],
       program.programId
     )
 
-    const [movieReviewCounterPda] = await anchor.web3.PublicKey.findProgramAddress(
-      [Buffer.from("counter"), movieReviewPda.toBuffer()],
-      program.programId
-    )
-
-    const tokenAddress = await getAssociatedTokenAddress(mintPDA, publicKey)
+    const tokenAccount = await getAssociatedTokenAddress(mintPDA, publicKey)
 
     const transaction = new anchor.web3.Transaction()
 
@@ -54,9 +47,9 @@ export const Form: FC = () => {
       const instruction = await program.methods
         .addMovieReview(title, description, rating)
         .accounts({
-          movieReview: movieReviewPda,
+          movieReview: movieReviewPDA,
           mint: mintPDA,
-          tokenAccount: tokenAddress,
+          tokenAccount: tokenAccount,
         })
         .instruction()
 
@@ -65,7 +58,7 @@ export const Form: FC = () => {
       const instruction = await program.methods
         .updateMovieReview(title, description, rating)
         .accounts({
-          movieReview: movieReviewPda
+          movieReview: movieReviewPDA
         })
         .instruction()
 

@@ -25,7 +25,6 @@ export const Card: FC<CardProps> = (props) => {
         <HStack>
           <Text
             fontWeight="bold"
-            textTransform="uppercase"
             fontSize="lg"
             letterSpacing="wide"
             color="gray.200"

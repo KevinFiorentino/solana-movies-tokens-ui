@@ -135,11 +135,6 @@
           "isSigner": false
         },
         {
-          "name": "tokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "user",
           "isMut": true,
           "isSigner": true
@@ -151,11 +146,6 @@
         },
         {
           "name": "tokenMetadataProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -220,6 +210,6 @@
     }
   ],
   "metadata": {
-    "address": "zTaCpP3fLPMErJib4KLtfxMa5GT7YDmyxYZdddeCeDi"
+    "address": "EjUKYk8xsG78gZTkR6EqjKJADjyqSiTsr6CtajCBmKrT"
   }
 }
